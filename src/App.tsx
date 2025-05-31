@@ -29,7 +29,7 @@ function HomePage() {
 
 function App() {
   return (
-    <Router>
+    <Router basename="/AssembleRoad">
       <div className="min-h-screen bg-white text-gray-800 font-sans">
         <Routes>
           <Route path="/" element={<HomePage />} />
