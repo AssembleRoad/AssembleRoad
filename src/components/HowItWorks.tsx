@@ -48,13 +48,7 @@ const HowItWorks = () => {
                 {step.description}
               </p>
               
-              {index < steps.length - 1 && (
-                <div className="hidden md:block absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2">
-                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                    <span className="text-blue-600">→</span>
-                  </div>
-                </div>
-              )}
+              
             </div>
           ))}
         </div>

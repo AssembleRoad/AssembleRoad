@@ -22,7 +22,18 @@ const LanguageSelector = () => {
         <select
           value={i18n.language}
           onChange={(e) => handleLanguageChange(e.target.value)}
-          className="appearance-none bg-transparent border-none text-gray-700 py-1 pl-2 pr-8 rounded leading-tight focus:outline-none"
+          className="hidden 
+            md:inline-flex 
+            appearance-none 
+            bg-transparent 
+            border-none 
+            text-gray-700 
+            py-1 
+            pl-2 
+            pr-8 
+            rounded 
+            leading-tight 
+            focus:outline-none"
           aria-label={t('languageSelector.label')}
         >
           {languages.map((language) => (
