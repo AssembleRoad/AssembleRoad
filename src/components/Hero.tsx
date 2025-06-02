@@ -5,7 +5,7 @@ import { ArrowDown } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section id="hero" className="py-12 md:py-16">
+    <section id="hero" className="py-16 md:py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-8">
           <div className="lg:w-1/2 lg:pr-12">
@@ -19,40 +19,40 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
-  {/* Bouton Google Play */}
-  <a
-    href="#"
-    className="flex items-center border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-100 transition-colors"
-  >
-    {/* Icône Google Play */}
-    <img
-      src="/play_store_2.png"
-      alt="Google Play"
-      className="h-6 w-auto mr-3"
-    />
-    <div className="text-left">
-      <p className="text-[10px] text-gray-500 leading-none">GET IN ON</p>
-      <p className="text-sm font-semibold text-gray-900 leading-none">Google Play</p>
-    </div>
-  </a>
+              {/* Bouton Google Play */}
+              <a
+                href="#"
+                className="flex items-center border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-100 transition-colors"
+              >
+                {/* Icône Google Play */}
+                <img
+                  src="play_store_2.png"
+                  alt="Google Play"
+                  className="h-6 w-auto mr-3"
+                />
+                <div className="text-left">
+                  <p className="text-[10px] text-gray-500 leading-none">GET IN ON</p>
+                  <p className="text-sm font-semibold text-gray-900 leading-none">Google Play</p>
+                </div>
+              </a>
 
-  {/* Bouton App Store */}
-  <a
-    href="#"
-    className="flex items-center border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-100 transition-colors"
-  >
-    {/* Icône App Store */}
-    <img
-      src="/app_store_2.jpg"
-      alt="App Store"
-      className="h-6 w-auto mr-3"
-    />
-    <div className="text-left">
-      <p className="text-[10px] text-gray-500 leading-none">Download on the</p>
-      <p className="text-sm font-semibold text-gray-900 leading-none">App Store</p>
-    </div>
-  </a>
-</div>
+              {/* Bouton App Store */}
+              <a
+                href="#"
+                className="flex items-center border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-100 transition-colors"
+              >
+                {/* Icône App Store */}
+                <img
+                  src="app_store_2.png"
+                  alt="App Store"
+                  className="h-6 w-auto mr-3"
+                />
+                <div className="text-left">
+                  <p className="text-[10px] text-gray-500 leading-none">Download on the</p>
+                  <p className="text-sm font-semibold text-gray-900 leading-none">App Store</p>
+                </div>
+              </a>
+            </div>
 
             
             <div>
