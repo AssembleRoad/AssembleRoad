@@ -1,4 +1,11 @@
 export default {
+  upbar: {
+    title_1: "Home",
+    title_2: "Hoe werkt het",
+    title_3: "Voor bedrijven",
+    title_4: "FAQ",
+    title_5: "Contact"
+  },
   hero: {
     title: "Herdefinieer meubelassemblage met Assemble Road",
     subtitle: "De mobiele app die papieren instructies omzet in interactieve 3D-tutorials. Geen fouten, stress of retouren meer!",

@@ -11,6 +11,8 @@ import LegalNotice from './components/legal/LegalNotice';
 import Privacy from './components/legal/Privacy';
 import Terms from './components/legal/Terms';
 
+import HeroPreview from './components/HeroPreview';
+
 function HomePage() {
   return (
     <>

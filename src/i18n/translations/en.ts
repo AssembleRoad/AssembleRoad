@@ -1,4 +1,11 @@
 export default {
+  upbar: {
+    title_1: "Home",
+    title_2: "How it works",
+    title_3: "For businesses",
+    title_4: "FAQ",
+    title_5: "Contact"
+  },
   hero: {
     title: "Reinvent furniture assembly with Assemble Road",
     subtitle: "The mobile app that transforms paper instructions into interactive 3D tutorials. No more errors, stress, or returns!",

@@ -1,4 +1,11 @@
 export default {
+  upbar: {
+    title_1: "Accueil",
+    title_2: "Comment ça marche",
+    title_3: "Pour les entreprises",
+    title_4: "FAQ",
+    title_5: "Contact"
+  },
   hero: {
     title: "Réinventez le montage de meubles avec Assemble Road",
     subtitle: "L'application mobile qui transforme la notice papier en tutoriel 3D interactif. Fini les erreurs, le stress et les retours !",

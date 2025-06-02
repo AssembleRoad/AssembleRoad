@@ -26,11 +26,11 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { name: t('hero.title'), href: '#hero' },
-    { name: t('howItWorks.title'), href: '#how-it-works' },
-    { name: t('forBusinesses.title'), href: '#for-businesses' },
-    { name: t('faq.title'), href: '#faq' },
-    { name: t('contact.title'), href: '#contact' }
+    { name: t('upbar.title_1'), href: '#hero' },
+    { name: t('upbar.title_2'), href: '#how-it-works' },
+    { name: t('upbar.title_3'), href: '#for-businesses' },
+    { name: t('upbar.title_4'), href: '#faq' },
+    { name: t('upbar.title_5'), href: '#contact' }
   ];
 
   return (

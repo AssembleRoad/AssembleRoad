@@ -1,4 +1,6 @@
 import React from 'react';
+import HeroPreview from './HeroPreview';
+
 import { ArrowDown } from 'lucide-react';
 
 const Hero = () => {
@@ -16,28 +18,42 @@ const Hero = () => {
               Fini les erreurs, le stress et les retours !
             </p>
             
-            <div className="space-y-4 md:space-y-0 md:space-x-4 md:flex mb-6">
-              <a 
-                href="#" 
-                className="flex items-center justify-center w-full md:w-auto transition-opacity hover:opacity-80"
-              >
-                <img 
-                  src="/app-store-badge.png" 
-                  alt="Download on the App Store" 
-                  className="h-12"
-                />
-              </a>
-              <a 
-                href="#" 
-                className="flex items-center justify-center w-full md:w-auto transition-opacity hover:opacity-80"
-              >
-                <img 
-                  src="/google-play-badge.png" 
-                  alt="Get it on Google Play" 
-                  className="h-12"
-                />
-              </a>
-            </div>
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+  {/* Bouton Google Play */}
+  <a
+    href="#"
+    className="flex items-center border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-100 transition-colors"
+  >
+    {/* Icône Google Play */}
+    <img
+      src="/play_store_2.png"
+      alt="Google Play"
+      className="h-6 w-auto mr-3"
+    />
+    <div className="text-left">
+      <p className="text-[10px] text-gray-500 leading-none">GET IN ON</p>
+      <p className="text-sm font-semibold text-gray-900 leading-none">Google Play</p>
+    </div>
+  </a>
+
+  {/* Bouton App Store */}
+  <a
+    href="#"
+    className="flex items-center border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-100 transition-colors"
+  >
+    {/* Icône App Store */}
+    <img
+      src="/app_store_2.jpg"
+      alt="App Store"
+      className="h-6 w-auto mr-3"
+    />
+    <div className="text-left">
+      <p className="text-[10px] text-gray-500 leading-none">Download on the</p>
+      <p className="text-sm font-semibold text-gray-900 leading-none">App Store</p>
+    </div>
+  </a>
+</div>
+
             
             <div>
               <a 
@@ -55,14 +71,10 @@ const Hero = () => {
               <div className="bg-gradient-to-br from-blue-100 to-green-100 rounded-3xl p-4 shadow-lg">
                 <div className="bg-white rounded-2xl overflow-hidden shadow-md">
                   <div className="aspect-[9/16] bg-gradient-to-br from-blue-50 to-green-50 flex items-center justify-center">
-                    <div className="text-center p-8">
-                      <div className="w-32 h-32 mx-auto bg-blue-100 rounded-xl mb-4 flex items-center justify-center">
-                        <span className="text-blue-600 text-lg">Vue 3D interactive</span>
-                      </div>
-                      <p className="text-gray-600">Prévisualisation de l'application</p>
-                    </div>
+                    <HeroPreview/>
                   </div>
                 </div>
+
               </div>
               
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-green-100 rounded-full opacity-50 z-0"></div>
