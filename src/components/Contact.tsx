@@ -29,7 +29,7 @@ const Contact = () => {
                       href="mailto:assemble-road@proton.me" 
                       className="hover:underline"
                     >
-                      assemble-road@proton.me
+                      assembleroad@gmail.com
                     </a>
                   </div>
                 </div>
@@ -38,7 +38,7 @@ const Contact = () => {
                   <MapPin className="mr-4 flex-shrink-0" />
                   <div>
                     <p className="font-medium">Adresse</p>
-                    <p>Paris, France</p>
+                    <p>Mons, Belgique</p>
                   </div>
                 </div>
                 
@@ -46,7 +46,7 @@ const Contact = () => {
                   <Phone className="mr-4 flex-shrink-0" />
                   <div>
                     <p className="font-medium">Téléphone</p>
-                    <p>+33 1 23 45 67 89</p>
+                    <p>+32 497 82 85 56</p>
                   </div>
                 </div>
               </div>
@@ -54,7 +54,7 @@ const Contact = () => {
             
             <div className="md:w-1/2 p-6 md:p-10">
               <a 
-                href="mailto:assemble-road@proton.me"
+                href="mailto:assembleroad@gmail.com"
                 className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg text-center transition-colors duration-300 mb-4"
               >
                 Envoyer un email
