@@ -1,3 +1,4 @@
+// Navbar.tsx
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -57,14 +58,17 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <LanguageSelector />
+            {/* Pour le bureau, utiliser la variante complète (par défaut ou explicite) */}
+            <LanguageSelector variant="full" /> 
           </div>
 
           <div className="md:hidden flex items-center gap-4">
-            <LanguageSelector />
+            {/* Pour le mobile, utiliser la variante icône uniquement */}
+            <LanguageSelector variant="iconOnly" /> 
             <button 
               onClick={toggleMenu}
               className="text-gray-700 hover:text-blue-600 focus:outline-none"
+              aria-label={isOpen ? t('navbar.closeMenu', 'Fermer le menu') : t('navbar.openMenu', 'Ouvrir le menu')}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -83,6 +87,12 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
+            {/* Optionnel: si vous voulez le sélecteur de langue aussi dans le menu mobile déroulant, 
+                vous pouvez l'ajouter ici, peut-être avec la variante 'full'.
+            <div className="pt-2 mt-2 border-t border-gray-200">
+              <LanguageSelector variant="full" />
+            </div>
+            */}
           </div>
         )}
       </div>
