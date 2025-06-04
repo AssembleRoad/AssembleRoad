@@ -7,8 +7,8 @@ import * as THREE from "three";
 /**
  * Responsive hero preview with immutable camera.
  * ───────────────────────────────────────────────
- *   • Desktop (≥ md): slider en bas à droite pour zoom (scale 0.6‑1.4)
- *   • Mobile : slider caché, pinch/trackpad wheel pour zoom
+ *   • Desktop (≥ md): slider bottom‑right for zoom (scale 0.6‑1.4)
+ *   • Mobile : slider hidden, pinch‑to‑zoom & single‑finger drag
  *   • Horizontal drag  → rotation Y
  *   • Vertical drag    → translation Z (push/pull)
  *   • Caméra fixe à [0,1.2,5]
@@ -17,7 +17,7 @@ export default function HeroPreview() {
   const rigRef = useRef<THREE.Group>(null);
   const [scale, setScale] = useState<number>(1);
 
-  /* Synchronise la valeur du slider avec l'échelle de l'objet */
+  // Apply scale when state changes (desktop slider)
   useEffect(() => {
     if (rigRef.current) rigRef.current.scale.setScalar(scale);
   }, [scale]);
@@ -28,7 +28,7 @@ export default function HeroPreview() {
       <Canvas
         dpr={[1, 2]}
         camera={{ position: [0, 1.2, 5], fov: 45, near: 0.1, far: 100 }}
-        style={{ background: "#1976d2" }}
+        style={{ background: "#1976d2", touchAction: "none" /* disable browser gestures */ }}
       >
         <Suspense fallback={null}>
           {/* Lighting */}
@@ -45,11 +45,11 @@ export default function HeroPreview() {
           <Environment preset="city" background={false} />
 
           {/* Gestures */}
-          <InteractionController rigRef={rigRef} />
+          <InteractionController rigRef={rigRef} setScale={setScale} />
         </Suspense>
       </Canvas>
 
-      {/* Desktop‑only zoom slider (rotated vertical) */}
+      {/* Desktop‑only zoom slider */}
       <input
         type="range"
         min={0.6}
@@ -98,16 +98,24 @@ function Table() {
   );
 }
 
-/* Interaction logic */
+/* ───────── Interaction logic ───────── */
 
 type Mode = "rotate" | "translate" | null;
 interface InteractionProps {
   rigRef: React.RefObject<THREE.Group>;
+  setScale: (s: number) => void; // update state when pinch zoom used
 }
 
-function InteractionController({ rigRef }: InteractionProps) {
+function InteractionController({ rigRef, setScale }: InteractionProps) {
   const { gl } = useThree();
-  const state = useRef<{ active: boolean; startX: number; startY: number; mode: Mode }>({
+
+  // Track active pointers for pinch (pointerId → position)
+  const pointers = useRef<Map<number, { x: number; y: number }>>(new Map());
+  const initialPinchDist = useRef<number>(0);
+  const initialScale = useRef<number>(1);
+
+  // Single‑pointer drag state
+  const drag = useRef<{ active: boolean; startX: number; startY: number; mode: Mode }>({
     active: false,
     startX: 0,
     startY: 0,
@@ -117,55 +125,110 @@ function InteractionController({ rigRef }: InteractionProps) {
   useEffect(() => {
     const canvas = gl.domElement as HTMLCanvasElement;
 
+    /* ──── Helpers ──── */
+    const getDistance = (a: { x: number; y: number }, b: { x: number; y: number }) => {
+      const dx = a.x - b.x;
+      const dy = a.y - b.y;
+      return Math.hypot(dx, dy);
+    };
+
+    /* ──── Pointer handlers ──── */
     const onPointerDown = (e: PointerEvent) => {
-      state.current.active = true;
-      state.current.startX = e.clientX;
-      state.current.startY = e.clientY;
-      state.current.mode = null;
+      canvas.setPointerCapture(e.pointerId);
+      pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+      if (pointers.current.size === 1) {
+        // Start single‑finger drag
+        drag.current.active = true;
+        drag.current.startX = e.clientX;
+        drag.current.startY = e.clientY;
+        drag.current.mode = null;
+      } else if (pointers.current.size === 2) {
+        // Begin pinch
+        const [p1, p2] = Array.from(pointers.current.values());
+        initialPinchDist.current = getDistance(p1, p2);
+        initialScale.current = rigRef.current ? rigRef.current.scale.x : 1;
+        drag.current.active = false; // cancel drag while pinching
+      }
     };
 
     const onPointerMove = (e: PointerEvent) => {
-      if (!state.current.active || !rigRef.current) return;
-      const dx = e.clientX - state.current.startX;
-      const dy = e.clientY - state.current.startY;
-      if (state.current.mode === null) {
-        state.current.mode = Math.abs(dx) > Math.abs(dy) ? "rotate" : "translate";
+      if (!rigRef.current) return;
+
+      if (pointers.current.has(e.pointerId)) {
+        pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
       }
-      if (state.current.mode === "rotate") {
-        rigRef.current.rotation.y += dx * 0.005;
-      } else {
-        rigRef.current.position.z -= dy * 0.01;
-        rigRef.current.position.z = THREE.MathUtils.clamp(rigRef.current.position.z, -3, 1.5);
+
+      // Pinch handling (two active pointers)
+      if (pointers.current.size === 2) {
+        const [p1, p2] = Array.from(pointers.current.values());
+        const newDist = getDistance(p1, p2);
+        let newScale = initialScale.current * (newDist / initialPinchDist.current);
+        newScale = THREE.MathUtils.clamp(newScale, 0.6, 1.4);
+        rigRef.current.scale.setScalar(newScale);
+        setScale(newScale); // sync with desktop slider state (even if slider hidden)
+        return;
       }
-      state.current.startX = e.clientX;
-      state.current.startY = e.clientY;
+
+      // Single‑finger drag interaction
+      if (drag.current.active) {
+        const dx = e.clientX - drag.current.startX;
+        const dy = e.clientY - drag.current.startY;
+
+        if (drag.current.mode === null) {
+          drag.current.mode = Math.abs(dx) > Math.abs(dy) ? "rotate" : "translate";
+        }
+
+        if (drag.current.mode === "rotate") {
+          rigRef.current.rotation.y += dx * 0.005;
+        } else {
+          rigRef.current.position.z -= dy * 0.01;
+          rigRef.current.position.z = THREE.MathUtils.clamp(rigRef.current.position.z, -3, 1.5);
+        }
+
+        drag.current.startX = e.clientX;
+        drag.current.startY = e.clientY;
+      }
     };
 
-    const endDrag = () => {
-      state.current.active = false;
-      state.current.mode = null;
+    const onPointerUp = (e: PointerEvent) => {
+      canvas.releasePointerCapture(e.pointerId);
+      pointers.current.delete(e.pointerId);
+
+      if (pointers.current.size < 2) {
+        initialPinchDist.current = 0;
+      }
+
+      if (pointers.current.size === 0) {
+        drag.current.active = false;
+        drag.current.mode = null;
+      }
     };
 
-    /* Wheel (trackpad / pinch) for uniform scale */
+    /* ──── Wheel (desktop trackpad) ──── */
     const onWheel = (e: WheelEvent) => {
       if (!rigRef.current) return;
       let s = rigRef.current.scale.x - e.deltaY * 0.001;
       s = THREE.MathUtils.clamp(s, 0.6, 1.4);
       rigRef.current.scale.setScalar(s);
+      setScale(s);
     };
 
+    /* ──── Listener binding ──── */
     canvas.addEventListener("pointerdown", onPointerDown);
-    window.addEventListener("pointermove", onPointerMove);
-    window.addEventListener("pointerup", endDrag);
+    canvas.addEventListener("pointermove", onPointerMove);
+    canvas.addEventListener("pointerup", onPointerUp);
+    canvas.addEventListener("pointercancel", onPointerUp);
     canvas.addEventListener("wheel", onWheel, { passive: true });
 
     return () => {
       canvas.removeEventListener("pointerdown", onPointerDown);
-      window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("pointerup", endDrag);
+      canvas.removeEventListener("pointermove", onPointerMove);
+      canvas.removeEventListener("pointerup", onPointerUp);
+      canvas.removeEventListener("pointercancel", onPointerUp);
       canvas.removeEventListener("wheel", onWheel);
     };
-  }, [gl, rigRef]);
+  }, [gl, rigRef, setScale]);
 
   return null;
 }
