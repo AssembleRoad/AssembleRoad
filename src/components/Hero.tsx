@@ -3,6 +3,28 @@ import PhoneMockup from './PhoneMockup';
 import { ArrowDown } from 'lucide-react';
 
 const Hero: React.FC = () => {
+  // Fonction de redirection vers le Play Store (Android)
+  const openPlayStore = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    event.preventDefault();
+    // On essaie d’abord le deep link
+    window.location.href = 'market://details?id=com.assemble.road';
+    // Après 500 ms, si l’utilisateur n’a pas basculé vers l’app, on le redirige vers la page web
+    setTimeout(() => {
+      window.location.href = 'https://play.google.com/store'; //'https://play.google.com/store/apps/details?id=com.assemble.road';
+    }, 500);
+  };
+
+  // Fonction de redirection vers l’App Store (iOS)
+  const openAppStore = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    event.preventDefault();
+    // On essaie d’abord le deep link iOS
+    window.location.href = 'itms-apps://itunes.apple.com/app/id1234567890';
+    // Après 500 ms, si l’utilisateur n’a pas basculé vers l’app, on le redirige vers la page web
+    setTimeout(() => {
+      window.location.href = 'https://www.apple.com/app-store/';//'https://apps.apple.com/fr/app/assemble-road/id1234567890';
+    }, 500);
+  };
+
   return (
     <section id="hero" className="py-16 md:py-28 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,6 +44,7 @@ const Hero: React.FC = () => {
               {/* Bouton Google Play */}
               <a
                 href="#"
+                onClick={openPlayStore}
                 className="flex items-center border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-100 transition-colors bg-white shadow-sm"
               >
                 <img
@@ -38,6 +61,7 @@ const Hero: React.FC = () => {
               {/* Bouton App Store */}
               <a
                 href="#"
+                onClick={openAppStore}
                 className="flex items-center border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-100 transition-colors bg-white shadow-sm"
               >
                 <img
