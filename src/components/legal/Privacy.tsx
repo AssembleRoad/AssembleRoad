@@ -31,8 +31,8 @@ const Privacy = () => {
             
             <p>
               Pour toute question ou demande de modification/suppression, 
-              contactez <a href="mailto:assemble-road@proton.me" className="text-blue-600 hover:text-blue-800">
-                assemble-road@proton.me
+              contactez <a href="mailto:assembleroad@gmail.com" className="text-blue-600 hover:text-blue-800">
+                assembleroad@gmail.com
               </a>
             </p>
           </section>

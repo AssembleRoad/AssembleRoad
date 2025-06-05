@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
@@ -18,7 +17,7 @@ const LegalNotice = () => {
             <h2 className="text-xl font-semibold mb-4">Éditeur du site</h2>
             <p>Assemble Road</p>
             <p>Représentant : Anthony Moulin</p>
-            <p>Contact : assemble-road@proton.me</p>
+            <p>Contact : assembleroad@gmail.com</p>
             <p>Adresse : Belgique</p>
             <p>Numéro d'entreprise : En cours de création</p>
           </section>

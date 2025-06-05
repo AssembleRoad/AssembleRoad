@@ -24,6 +24,15 @@ export default function HeroPreview() {
 
   return (
     <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden">
+      {/* Status bar */}
+      <div className="absolute z-10 top-0 inset-x-0 flex justify-between items-center px-5 pt-0 text-s h-8 text-black pointer-events-none select-none">
+        <span>3:41</span>
+        <div className="flex items-center gap-1">
+          <span className="block w-3 h-3 rounded-full border-2 border-black"></span>
+          <span className="block w-3 h-3 rounded-full border-2 border-black"></span>
+        </div>
+      </div>
+      
       <Canvas
         dpr={[1, 2]}
         camera={{ position: [0, 1.2, 5], fov: 45 }}
@@ -53,10 +62,12 @@ export default function HeroPreview() {
         step={0.01}
         value={scale}
         onChange={(e) => setScale(parseFloat(e.currentTarget.value))}
-        className="hidden md:block absolute bottom-3 right-3 w-32 rotate-90 origin-bottom-right cursor-pointer shadow-lg bg-white/40 backdrop-blur-sm rounded-lg"
+        className="hidden md:block absolute bottom-3 right-8 w-32 rotate-90 origin-bottom-right cursor-pointer bg-white/40 backdrop-blur-sm rounded-lg accent-[#E0E0E0]"
+        aria-label="Zoom"
+        style={{ pointerEvents: "auto", accentColor: "#E0E0E0" }}
       />
-
-      <div className="pointer-events-none absolute bottom-3 left-3 flex flex-col gap-2 text-white/70">
+      
+      <div className="pointer-events-none absolute bottom-4 left-3 flex flex-col gap-2 text-white/70">
         <ZoomIn size={24} />
         <Rotate3D size={24} />
         <Move size={24} />

@@ -1,20 +1,20 @@
 import React from 'react';
-import HeroPreview from './HeroPreview';
-
+import PhoneMockup from './PhoneMockup';
 import { ArrowDown } from 'lucide-react';
 
-const Hero = () => {
+const Hero: React.FC = () => {
   return (
-    <section id="hero" className="py-16 md:py-20">
+    <section id="hero" className="py-16 md:py-28 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center gap-8">
-          <div className="lg:w-1/2 lg:pr-12">
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          {/* Texte et boutons */}
+          <div className="lg:w-1/2 lg:pr-12 z-10">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900 mb-4">
               Réinventez le montage de meubles avec <span className="text-blue-600">Assemble Road</span>
             </h1>
             
-            <p className="text-xl text-gray-600 mb-6">
-              L'application mobile qui transforme la notice papier en tutoriel 3D interactif. 
+            <p className="text-lg text-gray-600 mb-6">
+              L'application mobile qui transforme la notice papier en tutoriel 3D interactif.
               Fini les erreurs, le stress et les retours !
             </p>
             
@@ -22,16 +22,15 @@ const Hero = () => {
               {/* Bouton Google Play */}
               <a
                 href="#"
-                className="flex items-center border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-100 transition-colors"
+                className="flex items-center border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-100 transition-colors bg-white shadow-sm"
               >
-                {/* Icône Google Play */}
                 <img
                   src="play_store_2.png"
                   alt="Google Play"
                   className="h-6 w-auto mr-3"
                 />
                 <div className="text-left">
-                  <p className="text-[10px] text-gray-500 leading-none">GET IN ON</p>
+                  <p className="text-[10px] text-gray-500 leading-none">GET IT ON</p>
                   <p className="text-sm font-semibold text-gray-900 leading-none">Google Play</p>
                 </div>
               </a>
@@ -39,9 +38,8 @@ const Hero = () => {
               {/* Bouton App Store */}
               <a
                 href="#"
-                className="flex items-center border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-100 transition-colors"
+                className="flex items-center border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-100 transition-colors bg-white shadow-sm"
               >
-                {/* Icône App Store */}
                 <img
                   src="app_store_2.png"
                   alt="App Store"
@@ -54,31 +52,21 @@ const Hero = () => {
               </a>
             </div>
 
-            
             <div>
               <a 
                 href="#how-it-works" 
-                className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300"
+                className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300 font-medium"
               >
                 Découvrir comment ça marche
-                <ArrowDown size={18} className="ml-2 animate-bounce" />
+                <ArrowDown size={20} className="ml-2 animate-bounce" />
               </a>
             </div>
           </div>
           
-          <div className="lg:w-1/2">
-            <div className="relative max-w-md mx-auto">
-              <div className="bg-gradient-to-br from-blue-100 to-green-100 rounded-3xl p-4 shadow-lg">
-                <div className="bg-white rounded-2xl overflow-hidden shadow-md">
-                  <div className="aspect-[9/16] bg-gradient-to-br from-blue-50 to-green-50 flex items-center justify-center">
-                    <HeroPreview/>
-                  </div>
-                </div>
-
-              </div>
-              
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-green-100 rounded-full opacity-50 z-0"></div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-blue-100 rounded-full opacity-50 z-0"></div>
+          {/* Aperçu dans le téléphone agrandi */}
+          <div className="lg:w-1/2 relative">
+            <div className="mx-auto max-w-[380px] drop-shadow-xl">
+              <PhoneMockup />
             </div>
           </div>
         </div>

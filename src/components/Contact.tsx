@@ -26,7 +26,7 @@ const Contact = () => {
                   <div>
                     <p className="font-medium">Email</p>
                     <a 
-                      href="mailto:assemble-road@proton.me" 
+                      href="mailto:assembleroad@gmail.com" 
                       className="hover:underline"
                     >
                       assembleroad@gmail.com
