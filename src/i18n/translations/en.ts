@@ -12,8 +12,8 @@ export default {
     discoverHow: "Discover how it works",
     googleplay_1: "Available on",
     googleplay_2: "Google Play",
-    appstore: "Download on",
-    appstore_2: "the App Store"
+    appstore: "Download on the",
+    appstore_2: "App Store"
   },
   howItWorks: {
     title: "How it works",
