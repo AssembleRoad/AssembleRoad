@@ -1,8 +1,11 @@
 import React from 'react';
 import PhoneMockup from './PhoneMockup';
 import { ArrowDown } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Hero: React.FC = () => {
+  const { t } = useTranslation();
+
   // Fonction de redirection vers le Play Store (Android)
   const openPlayStore = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event.preventDefault();
@@ -32,12 +35,12 @@ const Hero: React.FC = () => {
           {/* Texte et boutons */}
           <div className="lg:w-1/2 lg:pr-12 z-10">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900 mb-4">
-              Réinventez le montage de meubles avec <span className="text-blue-600">Assemble Road</span>
+              {t('hero.title', 'Réinventez le montage de meubles avec ')}
+              <span className="text-blue-600">Assemble Road</span>
             </h1>
             
             <p className="text-lg text-gray-600 mb-6">
-              L'application mobile qui transforme la notice papier en tutoriel 3D interactif.
-              Fini les erreurs, le stress et les retours !
+              { t('hero.subtitle', "L'application mobile qui transforme la notice papier en tutoriel 3D interactif. Fini les erreurs, le stress et les retours !") }
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -53,8 +56,8 @@ const Hero: React.FC = () => {
                   className="h-6 w-auto mr-3"
                 />
                 <div className="text-left">
-                  <p className="text-[10px] text-gray-500 leading-none">GET IT ON</p>
-                  <p className="text-sm font-semibold text-gray-900 leading-none">Google Play</p>
+                  <p className="text-[10px] text-gray-500 leading-none">{t('hero.googleplay_1', 'Disponible sur')}</p>
+                  <p className="text-sm font-semibold text-gray-900 leading-none">{t('hero.googleplay_2', 'Google Play')}</p>
                 </div>
               </a>
 
@@ -70,8 +73,8 @@ const Hero: React.FC = () => {
                   className="h-6 w-auto mr-3"
                 />
                 <div className="text-left">
-                  <p className="text-[10px] text-gray-500 leading-none">Download on the</p>
-                  <p className="text-sm font-semibold text-gray-900 leading-none">App Store</p>
+                  <p className="text-[10px] text-gray-500 leading-none">{t('hero.appstore', 'Télécharger dans')}</p>
+                  <p className="text-sm font-semibold text-gray-900 leading-none">{t('hero.appstore_2', "l'App Store")}</p>
                 </div>
               </a>
             </div>
@@ -81,7 +84,7 @@ const Hero: React.FC = () => {
                 href="#how-it-works" 
                 className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300 font-medium"
               >
-                Découvrir comment ça marche
+                {t('hero.discoverHow', 'Découvrir comment ça marche')}
                 <ArrowDown size={20} className="ml-2 animate-bounce" />
               </a>
             </div>

@@ -1,26 +1,18 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const FAQ = () => {
+
+  const { t } = useTranslation();
+
   const [openIndex, setOpenIndex] = useState(0);
 
-  const faqItems = [
-    {
-      question: "Combien ça coûte ?",
-      answer: "Le pilote sur 2 références est gratuit ! Nous vous proposons d'essayer notre solution sans aucun engagement pour vous permettre d'évaluer son impact sur votre entreprise."
-    },
-    {
-      question: "Faut-il un accès internet ?",
-      answer: "Oui, pour télécharger les modèles 3D et donner votre avis. L'application nécessite une connexion internet pour charger les modèles lors de la première utilisation, mais ensuite les modèles peuvent être sauvegardés pour une utilisation hors ligne."
-    },
-    {
-      question: "Combien de temps dure le test ?",
-      answer: "4 semaines en moyenne. Cette période nous permet de collecter suffisamment de données pour vous fournir une analyse pertinente des retours clients et de l'impact sur votre service après-vente."
-    },
-    {
-      question: "Comment les modèles 3D sont-ils créés ?",
-      answer: "Nos experts modélisent vos meubles à partir des plans techniques que vous nous fournissez. Le processus est simple et nécessite peu d'implication de votre part."
-    }
+   const faqItems = [
+    { qKey: 'faq.questions.cost.q',   aKey: 'faq.questions.cost.a' },
+    { qKey: 'faq.questions.internet.q', aKey: 'faq.questions.internet.a' },
+    { qKey: 'faq.questions.duration.q', aKey: 'faq.questions.duration.a' },
+    { qKey: 'faq.questions.models.q',   aKey: 'faq.questions.models.a' },
   ];
 
   const toggleQuestion = (index: number) => {
@@ -32,7 +24,7 @@ const FAQ = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            Questions fréquentes
+            {t('faq.title', 'Questions fréquentes')}
           </h2>
           
           <div className="space-y-4">
@@ -45,7 +37,7 @@ const FAQ = () => {
                   className="w-full text-left p-6 focus:outline-none flex justify-between items-center"
                   onClick={() => toggleQuestion(index)}
                 >
-                  <span className="text-lg font-medium text-gray-900">{item.question}</span>
+                  <span className="text-lg font-medium text-gray-900">{t(item.qKey, '…')}</span>
                   {openIndex === index ? (
                     <ChevronUp className="text-blue-600 flex-shrink-0" />
                   ) : (
@@ -58,7 +50,7 @@ const FAQ = () => {
                     openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
                   }`}
                 >
-                  <p className="text-gray-700">{item.answer}</p>
+                  <p className="text-gray-700">{t(item.aKey, '…')}</p>
                 </div>
               </div>
             ))}

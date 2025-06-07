@@ -1,7 +1,10 @@
-import React from 'react';
+//import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -13,26 +16,26 @@ const Footer = () => {
               Assemble Road
             </Link>
             <p className="mt-2">
-              Réinventez le montage de meubles
+              {t('footer.slogan', 'Réinventez le montage de meubles')}
             </p>
           </div>
           
           <div className="flex flex-wrap justify-center gap-4 md:gap-8">
             <Link to="/mentions-legales" className="hover:text-white transition-colors duration-300">
-              Mentions légales
+              {t('footer.legal', 'Mentions légales')}
             </Link>
             <Link to="/confidentialite" className="hover:text-white transition-colors duration-300">
-              Confidentialité
+              {t('footer.privacy', 'Confidentialité')}
             </Link>
             <Link to="/cgu" className="hover:text-white transition-colors duration-300">
-              CGU
+              {t('footer.terms', 'CGU')}
             </Link>
           </div>
         </div>
         
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p>
-            &copy; {currentYear} Assemble Road. Tous droits réservés.
+            &copy; {currentYear} Assemble Road. {t('footer.rights', 'Tous droits réservés.')}
           </p>
         </div>
       </div>

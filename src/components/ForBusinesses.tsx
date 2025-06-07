@@ -1,19 +1,23 @@
-import React from 'react';
+//import React from 'react';
 import { CheckCircle, TrendingUp, ShieldCheck } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const ForBusinesses = () => {
+
+  const { t } = useTranslation();
+
   const benefits = [
     {
       icon: <CheckCircle size={24} className="text-green-600" />,
-      text: "Plus de satisfaction client, moins de retours SAV"
+      text: t('forBusinesses.benefits.satisfaction','Plus de satisfaction client, moins de retours SAV'),
     },
     {
       icon: <TrendingUp size={24} className="text-green-600" />,
-      text: "Un outil marketing innovant pour votre marque"
+      text: t('forBusinesses.benefits.marketing',"Un outil marketing innovant pour votre marque"),
     },
     {
       icon: <ShieldCheck size={24} className="text-green-600" />,
-      text: "Analyse détaillée des retours clients pendant 4 semaines"
+      text: t('forBusinesses.benefits.analysis','Analyse détaillée des retours clients pendant 4 semaines'),
     }
   ];
 
@@ -23,10 +27,16 @@ const ForBusinesses = () => {
         <div className="bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl p-8 md:p-12 shadow-md">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Vous êtes un fabricant ou distributeur de meubles ?
+              {t(
+                'forBusinesses.title',
+                'Vous êtes un fabricant ou distributeur de meubles ?'
+              )}
             </h2>
             <p className="text-xl text-gray-700 mb-8">
-              Nous proposons de modéliser gratuitement 2 de vos références (1 simple et 1 complexe), fournissons des stickers QR à coller sur les boîtes, et analysons les retours clients pendant 4 semaines.
+              {t(
+                'forBusinesses.description',
+                'Nous proposons de modéliser gratuitement 2 de vos références (1 simple et 1 complexe), fournissons des stickers QR à coller sur les boîtes, et analysons les retours clients pendant 4 semaines.'
+              )}
             </p>
           </div>
           
@@ -46,7 +56,10 @@ const ForBusinesses = () => {
               href="#contact" 
               className="inline-flex items-center bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
             >
-              Contactez-nous pour un pilote gratuit
+              {t(
+                'forBusinesses.cta',
+                'Contactez-nous pour un pilote gratuit'
+              )}
             </a>
           </div>
         </div>
