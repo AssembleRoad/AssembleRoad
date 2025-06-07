@@ -7,7 +7,7 @@ import * as THREE from "three";
 /**
  * Responsive hero preview with immutable camera.
  * ───────────────────────────────────────────────
- *   • Desktop (≥ md): slider bottom‑right for zoom (scale 0.6‑1.4)
+ *   • Desktop (≥ md): slider bottom‑right for zoom (scale 0.6‑1.7)
  *   • Mobile : slider hidden, pinch‑zoom + drag
  *     – Horizontal drag  ⇒ rotation Y
  *     – Vertical drag    ⇒ translation Z
@@ -23,8 +23,8 @@ export default function HeroPreview() {
   }, [scale]);
 
   return (
-    <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden">
-      {/* Status bar */}
+    <div className="relative w-full h-full rounded-2xl overflow-hidden">
+      {/* Status bar aspect-[9/16] */}
       <div className="absolute z-10 top-0 inset-x-0 flex justify-between items-center px-5 pt-0 text-s h-8 text-black pointer-events-none select-none">
         <span>3:41</span>
         <div className="flex items-center gap-1">
@@ -35,7 +35,7 @@ export default function HeroPreview() {
       
       <Canvas
         dpr={[1, 2]}
-        camera={{ position: [0, 1.2, 5], fov: 45 }}
+        camera={{ position: [0, 1.5, 5], fov: 55 }}
         style={{ background: "#1976d2", touchAction: "none" }}
       >
         <Suspense fallback={null}>
@@ -58,7 +58,7 @@ export default function HeroPreview() {
       <input
         type="range"
         min={0.6}
-        max={1.4}
+        max={1.7}
         step={0.01}
         value={scale}
         onChange={(e) => setScale(parseFloat(e.currentTarget.value))}
@@ -137,7 +137,7 @@ function PointerControls({ rigRef, setScale }: PointerControlsProps) {
       if (pointers.current.size === 2) {
         const [p1, p2] = Array.from(pointers.current.values());
         let newScale = pinch.current.baseScale * (distance(p1, p2) / pinch.current.start);
-        newScale = THREE.MathUtils.clamp(newScale, 0.6, 1.4);
+        newScale = THREE.MathUtils.clamp(newScale, 0.6, 1.7);
         rigRef.current.scale.setScalar(newScale);
         setScale(newScale);
         return;
@@ -153,7 +153,7 @@ function PointerControls({ rigRef, setScale }: PointerControlsProps) {
         } else {
           // Translate Z
           rigRef.current.position.z -= dy * 0.02;
-          rigRef.current.position.z = THREE.MathUtils.clamp(rigRef.current.position.z, -3, 1.5);
+          rigRef.current.position.z = THREE.MathUtils.clamp(rigRef.current.position.z, -5, 3);
         }
 
         drag.current.prevX = e.clientX;
@@ -170,7 +170,7 @@ function PointerControls({ rigRef, setScale }: PointerControlsProps) {
     const onWheel = (e: WheelEvent) => {
       if (!rigRef.current) return;
       let s = rigRef.current.scale.x - e.deltaY * 0.001;
-      s = THREE.MathUtils.clamp(s, 0.6, 1.4);
+      s = THREE.MathUtils.clamp(s, 0.6, 1.7);
       rigRef.current.scale.setScalar(s);
       setScale(s);
     };
