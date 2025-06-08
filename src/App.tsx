@@ -11,7 +11,6 @@ import LegalNotice from './components/legal/LegalNotice';
 import Privacy from './components/legal/Privacy';
 import Terms from './components/legal/Terms';
 
-import HeroPreview from './components/HeroPreview';
 
 function HomePage() {
   return (
@@ -31,7 +30,7 @@ function HomePage() {
 
 function App() {
   return (
-    <Router basename="/AssembleRoad">
+    <Router basename="/AssembleRoad/">
       <div className="min-h-screen bg-white text-gray-800 font-sans">
         <Routes>
           <Route path="/" element={<HomePage />} />
